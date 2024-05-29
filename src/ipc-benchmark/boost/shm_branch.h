@@ -4,7 +4,7 @@
 #include <ipc-benchmark/base/performance.h>
 
 namespace ipc_benchmark {
-	class ShmBranch : Performance{
+	class ShmBranch : public Performance {
 	public:
 		ShmBranch();
 		~ShmBranch();

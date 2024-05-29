@@ -4,7 +4,7 @@
 #include <ipc-benchmark/base/performance.h>
 
 namespace ipc_benchmark {
-	class ShmTrunk : Performance{
+	class ShmTrunk : public Performance {
 	public:
 		ShmTrunk();
 		~ShmTrunk();
