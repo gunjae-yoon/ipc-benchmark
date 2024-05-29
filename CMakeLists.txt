@@ -30,6 +30,7 @@ add_custom_target(GEN_TARGET DEPENDS ${GEN_SRC})
 add_executable(${TARGET_APP}
 	${GEN_SRC}
 	src/main.cpp
+	src/ipc-benchmark/base/performance.cpp
 )
 add_dependencies(${TARGET_APP} GEN_TARGET)
 target_include_directories(${TARGET_APP} PRIVATE
