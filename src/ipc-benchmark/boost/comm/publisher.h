@@ -8,11 +8,18 @@
 namespace ipc_benchmark {
 	class Publisher {
 	public:
-		Publisher(std::string shmname, std::string topicname);
+		Publisher(std::string shmname, std::string topicname, uint64_t subscribers);
 		~Publisher();
 		
 		bool ready();
 		void run();
+	private:
+		struct {
+			std::string shm;
+			std::string topic;
+		} name;
+		uint64_t count;
+		boost::interprocess::managed_shared_memory segment;
 	};
 }
 
