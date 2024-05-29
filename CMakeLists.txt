@@ -20,9 +20,13 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(guutil)
 #find_package(guutil REQUIRED)
 
+set(BOOST_ROOT "/usr/local")
+find_package(Boost 1.85 REQUIRED COMPONENTS system thread)
+
 message("==================================================")
 message(STATUS "Compiler: ${CMAKE_CXX_COMPILER}")
 message(STATUS "guutil: ${guutil_VERSION}")
+message(STATUS "boost: ${Boost_VERSION}")
 message("==================================================")
 
 ##########################################################################
@@ -48,9 +52,11 @@ add_executable(${TARGET_APP}
 )
 add_dependencies(${TARGET_APP} GEN_TARGET)
 target_include_directories(${TARGET_APP} PRIVATE
+	${Boost_INCLUDE_DIRS}
 	include
 	src
 )
 target_link_libraries(${TARGET_APP} PRIVATE
+	${Boost_LIBRARIES}
 	guutil
 )
