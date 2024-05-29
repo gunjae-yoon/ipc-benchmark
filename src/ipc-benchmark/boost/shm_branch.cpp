@@ -15,6 +15,8 @@ namespace ipc_benchmark {
 
 	std::chrono::nanoseconds ShmBranch::run(uint64_t count) const {
 		logger.trace(__CLASS__, __FUNCTION__, count);
-		return 0ns;
+		std::chrono::time_point begin = std::chrono::system_clock::now();
+		std::chrono::time_point end = std::chrono::system_clock::now();
+		return end - begin;
 	}
 }

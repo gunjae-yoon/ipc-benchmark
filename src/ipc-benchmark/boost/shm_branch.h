@@ -2,6 +2,8 @@
 #define __ipc_benchmark_boost_shm_branch_h__
 
 #include <ipc-benchmark/base/performance.h>
+#include <ipc-benchmark/boost/comm/publisher.h>
+#include <ipc-benchmark/boost/comm/subscriber.h>
 
 namespace ipc_benchmark {
 	class ShmBranch : public Performance {

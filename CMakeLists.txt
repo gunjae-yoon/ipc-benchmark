@@ -47,6 +47,8 @@ add_executable(${TARGET_APP}
 	${GEN_SRC}
 	src/main.cpp
 	src/ipc-benchmark/base/performance.cpp
+	src/ipc-benchmark/boost/comm/publisher.cpp
+	src/ipc-benchmark/boost/comm/subscriber.cpp
 	src/ipc-benchmark/boost/shm_branch.cpp
 	src/ipc-benchmark/boost/shm_trunk.cpp
 )
