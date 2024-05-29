@@ -43,6 +43,7 @@ namespace ipc_benchmark {
 		publisher = new Publisher(shmname, topicname, count);
 		if (publisher == nullptr) {
 			// ERROR
+			return 0ns;
 		}
 
 		// step 2.2. create subscribers
@@ -50,6 +51,7 @@ namespace ipc_benchmark {
 			Subscriber* subscriber = new Subscriber(shmname, topicname, idx);
 			if (subscriber == nullptr) {
 				// ERROR
+				return 0ns;
 			}
 			subscribers.push_back(subscriber);
 		}
@@ -58,12 +60,14 @@ namespace ipc_benchmark {
 		// step 3.1. ready publisher
 		if (publisher->ready() == false) {
 			// ERROR
+			return 0ns;
 		}
 
 		// step 3.2. ready subscriber
 		for (Subscriber* subscriber : subscribers) {
 			if (subscriber->ready() == false) {
 				// ERROR
+				return 0ns;
 			}
 		}
 		
