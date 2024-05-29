@@ -31,6 +31,7 @@ add_executable(${TARGET_APP}
 	${GEN_SRC}
 	src/main.cpp
 	src/ipc-benchmark/base/performance.cpp
+	src/ipc-benchmark/boost/shm_trunk.cpp
 )
 add_dependencies(${TARGET_APP} GEN_TARGET)
 target_include_directories(${TARGET_APP} PRIVATE
