@@ -8,7 +8,7 @@
 namespace ipc_benchmark {
 	class Subscriber {
 	public:
-		Subscriber(std::string shmname, std::string topicname);
+		Subscriber(std::string shmname, std::string topicname, uint64_t idx);
 		~Subscriber();
 		
 		bool ready();

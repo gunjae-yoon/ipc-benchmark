@@ -8,6 +8,7 @@
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
 #include <boost/interprocess/sync/interprocess_condition.hpp>
+#include <cstdint>
 
 namespace ipc_benchmark {
 	// Typedefs for convenience
@@ -16,13 +17,13 @@ namespace ipc_benchmark {
 	typedef boost::interprocess::allocator<ShmString, boost::interprocess::managed_shared_memory::segment_manager> StringAllocator;
 	typedef boost::interprocess::vector<ShmString, StringAllocator> ShmStringVector;
 
-	typedef ShmString KeyType;
+	typedef uint64_t KeyType;
 	typedef std::pair<const KeyType, ShmStringVector> ValueType;
 
 	// Custom comparator
 	struct KeyCompare : public std::binary_function<KeyType, KeyType, bool> {
    		bool operator() (const KeyType &a, const KeyType &b) const {
-			return (a.compare(b) < 0);
+			return a < b;
 		}
 	};
 
