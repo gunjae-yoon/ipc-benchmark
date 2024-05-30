@@ -5,7 +5,7 @@
 namespace ipc_benchmark::branch {
 	extern guutil::log::Logger logger; // global logger
 
-	Subscriber::Subscriber(std::string shmname, std::string topicname, uint64_t idx) {
+	Subscriber::Subscriber(Name nameSet) : name(nameSet), obj(nullptr) {
 	}
 
 	Subscriber::~Subscriber() {

@@ -5,7 +5,10 @@
 namespace ipc_benchmark::branch {
 	extern guutil::log::Logger logger; // global logger
 
-	Publisher::Publisher(std::string shmname, std::string topicname, uint64_t subscribers) {
+	Publisher::Publisher(std::list<Proxy>& targets) {
+		for (Proxy& target : targets) {
+			proxies.push_back({target.name, nullptr});
+		}
 	}
 
 	Publisher::~Publisher() {
