@@ -1,14 +1,23 @@
 #include <ipc-benchmark/boost/comm/subscriber.h>
-#include <thread>
+#include <ipc-benchmark/base/performance.h>
+#include <guutil/log/logger.h>
 
 namespace ipc_benchmark {
+	extern guutil::log::Logger logger; // global logger
+
 	Subscriber::Subscriber(std::string shmname, std::string topicname, std::uint64_t idx) {
 		name.shm = shmname;
 		name.topic = topicname;
 		id = idx;
+		thread = nullptr;
 	}
 
 	Subscriber::~Subscriber() {
+		if ((thread != nullptr) && (thread->joinable())) {
+			thread->join();
+		}
+		delete(thread);
+		thread = nullptr;
 	}
 
 	bool Subscriber::ready() {
@@ -32,9 +41,34 @@ namespace ipc_benchmark {
 			return false;
 		}
 
+		thread = new std::thread([&](){
+			uint64_t received = 0;
+			// TODO: need to make flexibly
+			while (received < Performance::DATA_AMOUNT) {
+				boost::interprocess::scoped_lock<boost::interprocess::interprocess_mutex> lock(*mutex);
+				while (list->empty() == false) {
+					received++;
+					list->pop_front();
+				}
+				if (received < Performance::DATA_AMOUNT) {
+					cond->wait(lock);
+				}
+			}
+		});
+
+		if (thread == nullptr) {
+			return false;
+		}
+
 		return true;
 	}
 
 	void Subscriber::run() {
+	}
+
+	void Subscriber::wait() {
+		if ((thread != nullptr) && (thread->joinable())) {
+			thread->join();
+		}
 	}
 }
