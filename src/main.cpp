@@ -5,8 +5,17 @@
 #include <boost/core/demangle.hpp>
 #include <iostream>
 #include <typeinfo>
+#include <sstream>
+#include <locale>
+#include <iomanip>
 
 using namespace ipc_benchmark;
+
+struct comma_facet : public std::numpunct<char> {
+protected:
+    virtual char do_thousands_sep() const override { return ','; }
+    virtual std::string do_grouping() const override { return "\3"; }
+};
 
 int main(int argc, char** argv) {
 	logger.info("ipc-benchmark version:", Version::full);
@@ -14,7 +23,11 @@ int main(int argc, char** argv) {
 	const Performance* tests[] = { new ShmBranch(), new ShmTrunk() };
 
 	for (const Performance* test : tests) {
-		logger.info("test result of", boost::core::demangle(typeid(*test).name()), "is", test->run(count).count(), "nanoseconds");
+		uint64_t value = test->run(count).count();
+		std::stringstream ss;
+		ss.imbue(std::locale(std::locale::classic(), new comma_facet));
+		ss << value;
+		logger.info("test result of", boost::core::demangle(typeid(*test).name()), "is", ss.str(), "nanoseconds");
 	}
 	return 0;
 }
