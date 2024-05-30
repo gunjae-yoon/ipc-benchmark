@@ -20,7 +20,8 @@ namespace ipc_benchmark {
 		
 		private:
 			Name name;
-			Object* obj;
+			Object obj;
+			std::thread* thread;
 		};
 	}
 }
