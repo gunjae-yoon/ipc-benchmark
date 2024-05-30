@@ -34,7 +34,7 @@ namespace ipc_benchmark::branch {
 			
 			boost::interprocess::shared_memory_object::remove(proxy.name.shm.c_str());
 			Object* obj = new Object();
-			obj->segment = boost::interprocess::managed_shared_memory(boost::interprocess::create_only, proxy.name.shm.c_str(), shmsize),
+			obj->segment = boost::interprocess::managed_shared_memory(boost::interprocess::create_only, proxy.name.shm.c_str(), shmsize);
 			obj->mutex = obj->segment.construct<boost::interprocess::interprocess_mutex>(proxy.name.mutex.c_str())();
 			obj->cond = obj->segment.construct<boost::interprocess::interprocess_condition>(proxy.name.cond.c_str())();
 			obj->list = new ShmStringList(obj->segment.get_segment_manager());
