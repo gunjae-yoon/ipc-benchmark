@@ -21,6 +21,10 @@ namespace ipc_benchmark {
 			std::string topic;
 			mqd_t desc;
 			std::thread* thread;
+			struct {
+				const uint64_t capacity;
+				char* mem;
+			} buffer;
 		};
 	}
 }
