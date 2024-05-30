@@ -1,8 +1,8 @@
-#include <ipc-benchmark/boost/comm/subscriber.h>
+#include <ipc-benchmark/boost/trunk/subscriber.h>
 #include <ipc-benchmark/base/performance.h>
 #include <guutil/log/logger.h>
 
-namespace ipc_benchmark {
+namespace ipc_benchmark::trunk {
 	extern guutil::log::Logger logger; // global logger
 
 	Subscriber::Subscriber(std::string shmname, std::string topicname, std::uint64_t idx) {

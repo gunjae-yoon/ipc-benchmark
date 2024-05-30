@@ -1,20 +1,20 @@
-#include <ipc-benchmark/boost/shm_trunk.h>
+#include <ipc-benchmark/boost/trunk/performance.h>
 #include <list>
 
-#define __CLASS__ "[ShmTrunk]"
+#define __CLASS__ "[Performance]"
 
 using namespace std::chrono_literals;
 
-namespace ipc_benchmark {
-	ShmTrunk::ShmTrunk() : Performance() {
+namespace ipc_benchmark::trunk {
+	Performance::Performance() : ipc_benchmark::Performance() {
 		logger.trace(__CLASS__, __FUNCTION__);
 	}
 
-	ShmTrunk::~ShmTrunk() {
+	Performance::~Performance() {
 		logger.trace(__CLASS__, __FUNCTION__);
 	}
 
-	std::chrono::nanoseconds ShmTrunk::run(uint64_t count) const {
+	std::chrono::nanoseconds Performance::run(uint64_t count) const {
 		logger.trace(__CLASS__, __FUNCTION__, count);
 
 		// step 1. create shared memory, mutex, and condition
