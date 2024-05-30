@@ -27,8 +27,8 @@ namespace ipc_benchmark {
 
 		const std::string shmcond = "TrunkCondition" + std::to_string(id);
 		cond = segment.find<boost::interprocess::interprocess_condition>(shmcond.c_str()).first;
-		vector = &shmmap->find(id)->second;
-		if ((cond == nullptr) || (vector == nullptr)) {
+		list = &shmmap->find(id)->second;
+		if ((cond == nullptr) || (list == nullptr)) {
 			return false;
 		}
 
