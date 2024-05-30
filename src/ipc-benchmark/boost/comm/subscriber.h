@@ -13,6 +13,16 @@ namespace ipc_benchmark {
 		
 		bool ready();
 		void run();
+	private:
+		struct {
+			std::string shm;
+			std::string topic;
+		} name;
+		uint64_t id;
+		boost::interprocess::managed_shared_memory segment;
+		boost::interprocess::interprocess_mutex* mutex;
+		boost::interprocess::interprocess_condition* cond;
+		ShmStringVector* vector;
 	};
 }
 
