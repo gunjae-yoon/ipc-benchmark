@@ -83,7 +83,6 @@ namespace ipc_benchmark::trunk {
 		}
 		std::chrono::time_point end = std::chrono::system_clock::now();
 		std::chrono::nanoseconds result = (end - begin);
-		logger.debug(__CLASS__, __FUNCTION__, "waiting was done");
 		
 		// step 5. release resources
 		delete(publisher);
