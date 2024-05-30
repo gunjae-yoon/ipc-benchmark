@@ -11,6 +11,8 @@ namespace ipc_benchmark {
 		Performance() = default;
 		virtual ~Performance() = default;
 		
+		static const uint64_t DATA_AMOUNT;
+		
 		virtual std::chrono::nanoseconds run(uint64_t count) const = 0;
 	};
 
