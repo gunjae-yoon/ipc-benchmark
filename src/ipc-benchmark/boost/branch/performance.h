@@ -2,6 +2,8 @@
 #define __ipc_benchmark_boost_branch_performance_h__
 
 #include <ipc-benchmark/base/performance.h>
+#include <ipc-benchmark/boost/branch/publisher.h>
+#include <ipc-benchmark/boost/branch/subscriber.h>
 
 namespace ipc_benchmark {
 	namespace branch {

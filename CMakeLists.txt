@@ -48,6 +48,8 @@ add_executable(${TARGET_APP}
 	src/main.cpp
 	src/ipc-benchmark/base/performance.cpp
 	src/ipc-benchmark/boost/branch/performance.cpp
+	src/ipc-benchmark/boost/branch/publisher.cpp
+	src/ipc-benchmark/boost/branch/subscriber.cpp
 	src/ipc-benchmark/boost/trunk/performance.cpp
 	src/ipc-benchmark/boost/trunk/publisher.cpp
 	src/ipc-benchmark/boost/trunk/subscriber.cpp
