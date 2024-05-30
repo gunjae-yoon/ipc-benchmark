@@ -30,9 +30,13 @@ namespace ipc_benchmark {
 		SharedMap* shmmap = segment.construct<SharedMap>(topicname)(KeyCompare(), alloc);
 		boost::interprocess::interprocess_mutex* mutex = segment.construct<boost::interprocess::interprocess_mutex>(shmmutex)();
 		std::list<boost::interprocess::interprocess_condition*> cond;
+		std::list<ShmStringList*> shmlist;
 		for (uint64_t idx = 0; idx < count; idx++) {
 			const std::string shmcond = "TrunkCondition" + std::to_string(idx);
 			cond.push_back(segment.construct<boost::interprocess::interprocess_condition>(shmcond.c_str())());
+			ShmStringList* list = new ShmStringList(alloc);
+			shmlist.push_back(list);
+			shmmap->insert(ValueType(idx, *list));
 		}
 		
 		// step 2. create communication objects
@@ -74,9 +78,12 @@ namespace ipc_benchmark {
 		// step 4. run
 		std::chrono::time_point begin = std::chrono::system_clock::now();
 		publisher->run();
-		// TODO: need to consider how to check the subscription finished
+		for (Subscriber* subscriber : subscribers) {
+			subscriber->wait();
+		}
 		std::chrono::time_point end = std::chrono::system_clock::now();
 		std::chrono::nanoseconds result = (end - begin);
+		logger.debug(__CLASS__, __FUNCTION__, "waiting was done");
 		
 		// step 5. release resources
 		delete(publisher);

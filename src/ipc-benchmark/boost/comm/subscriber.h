@@ -4,6 +4,7 @@
 #include <ipc-benchmark/boost/base/types.h>
 #include <cstdint>
 #include <string>
+#include <thread>
 
 namespace ipc_benchmark {
 	class Subscriber {
@@ -13,6 +14,8 @@ namespace ipc_benchmark {
 		
 		bool ready();
 		void run();
+		void wait();
+
 	private:
 		struct {
 			std::string shm;
@@ -23,6 +26,7 @@ namespace ipc_benchmark {
 		boost::interprocess::interprocess_mutex* mutex;
 		boost::interprocess::interprocess_condition* cond;
 		ShmStringList* list;
+		std::thread* thread;
 	};
 }
 
