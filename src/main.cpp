@@ -1,7 +1,7 @@
 #include <ipc-benchmark/version.h>
 #include <ipc-benchmark/base/performance.h>
-#include <ipc-benchmark/boost/shm_branch.h>
-#include <ipc-benchmark/boost/shm_trunk.h>
+#include <ipc-benchmark/boost/branch/performance.h>
+#include <ipc-benchmark/boost/trunk/performance.h>
 #include <boost/core/demangle.hpp>
 #include <iostream>
 #include <typeinfo>
@@ -20,7 +20,7 @@ protected:
 int main(int argc, char** argv) {
 	logger.info("ipc-benchmark version:", Version::full);
 	const uint64_t count = 100;
-	const Performance* tests[] = { new ShmBranch(), new ShmTrunk() };
+	const Performance* tests[] = { new branch::Performance(), new trunk::Performance() };
 
 	for (const Performance* test : tests) {
 		uint64_t value = test->run(count).count();
