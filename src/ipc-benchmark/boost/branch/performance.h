@@ -1,5 +1,5 @@
-#ifndef __ipc_benchmark_boost_shm_branch_h__
-#define __ipc_benchmark_boost_shm_branch_h__
+#ifndef __ipc_benchmark_boost_branch_performance_h__
+#define __ipc_benchmark_boost_branch_performance_h__
 
 #include <ipc-benchmark/base/performance.h>
 

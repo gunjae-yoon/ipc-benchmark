@@ -1,5 +1,5 @@
-#ifndef __ipc_benchmark_boost_shm_trunk_h__
-#define __ipc_benchmark_boost_shm_trunk_h__
+#ifndef __ipc_benchmark_boost_trunk_performance_h__
+#define __ipc_benchmark_boost_trunk_performance_h__
 
 #include <ipc-benchmark/base/performance.h>
 #include <ipc-benchmark/boost/trunk/publisher.h>

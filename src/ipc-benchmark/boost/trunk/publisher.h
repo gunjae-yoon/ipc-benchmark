@@ -1,5 +1,5 @@
-#ifndef __ipc_benchmark_boost_comm_publisher_h__
-#define __ipc_benchmark_boost_comm_publisher_h__
+#ifndef __ipc_benchmark_boost_trunk_publisher_h__
+#define __ipc_benchmark_boost_trunk_publisher_h__
 
 #include <ipc-benchmark/boost/base/types.h>
 #include <cstdint>
