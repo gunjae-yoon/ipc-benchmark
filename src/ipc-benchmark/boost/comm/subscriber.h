@@ -22,7 +22,7 @@ namespace ipc_benchmark {
 		boost::interprocess::managed_shared_memory segment;
 		boost::interprocess::interprocess_mutex* mutex;
 		boost::interprocess::interprocess_condition* cond;
-		ShmStringVector* vector;
+		ShmStringList* list;
 	};
 }
 

@@ -24,7 +24,7 @@ namespace ipc_benchmark {
 		boost::interprocess::interprocess_mutex* mutex;
 		struct Proxy{
 			boost::interprocess::interprocess_condition* cond;
-			ShmStringVector* vector;
+			ShmStringList* list;
 		};
 		std::vector<Proxy> targets;
 	};

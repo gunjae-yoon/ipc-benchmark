@@ -28,8 +28,8 @@ namespace ipc_benchmark {
 		for (uint64_t idx = 0; idx < count; idx++) {
 			const std::string shmcond = "TrunkCondition" + std::to_string(idx);
 			targets[idx].cond = segment.find<boost::interprocess::interprocess_condition>(shmcond.c_str()).first;
-			targets[idx].vector = &shmmap->find(idx)->second;
-			if ((targets[idx].cond == nullptr) || (targets[idx].vector == nullptr)) {
+			targets[idx].list = &shmmap->find(idx)->second;
+			if ((targets[idx].cond == nullptr) || (targets[idx].list == nullptr)) {
 				return false;
 			}
 		}

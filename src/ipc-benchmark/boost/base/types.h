@@ -3,7 +3,7 @@
 
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/containers/map.hpp>
-#include <boost/interprocess/containers/vector.hpp>
+#include <boost/interprocess/containers/list.hpp>
 #include <boost/interprocess/containers/string.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
 #include <boost/interprocess/sync/interprocess_mutex.hpp>
@@ -15,10 +15,10 @@ namespace ipc_benchmark {
 	typedef boost::interprocess::allocator<char, boost::interprocess::managed_shared_memory::segment_manager> CharAllocator;
 	typedef boost::interprocess::basic_string<char, std::char_traits<char>, CharAllocator> ShmString;
 	typedef boost::interprocess::allocator<ShmString, boost::interprocess::managed_shared_memory::segment_manager> StringAllocator;
-	typedef boost::interprocess::vector<ShmString, StringAllocator> ShmStringVector;
+	typedef boost::interprocess::list<ShmString, StringAllocator> ShmStringList;
 
 	typedef uint64_t KeyType;
-	typedef std::pair<const KeyType, ShmStringVector> ValueType;
+	typedef std::pair<const KeyType, ShmStringList> ValueType;
 
 	// Custom comparator
 	struct KeyCompare : public std::binary_function<KeyType, KeyType, bool> {
@@ -29,7 +29,7 @@ namespace ipc_benchmark {
 
 	// Allocator and map typedefs
 	typedef boost::interprocess::allocator<ValueType, boost::interprocess::managed_shared_memory::segment_manager> ShmAllocator;
-	typedef boost::interprocess::map<KeyType, ShmStringVector, KeyCompare, ShmAllocator> SharedMap;
+	typedef boost::interprocess::map<KeyType, ShmStringList, KeyCompare, ShmAllocator> SharedMap;
 
 }
 
