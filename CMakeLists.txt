@@ -54,6 +54,9 @@ add_executable(${TARGET_APP}
 	src/ipc-benchmark/boost/trunk/publisher.cpp
 	src/ipc-benchmark/boost/trunk/subscriber.cpp
 	src/ipc-benchmark/posix/base/mqstring.cpp
+	src/ipc-benchmark/posix/mqueue/performance.cpp
+	src/ipc-benchmark/posix/mqueue/publisher.cpp
+	src/ipc-benchmark/posix/mqueue/subscriber.cpp
 )
 add_dependencies(${TARGET_APP} GEN_TARGET)
 target_include_directories(${TARGET_APP} PRIVATE
