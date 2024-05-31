@@ -79,6 +79,7 @@ namespace ipc_benchmark::mqueue {
 		for (Proxy& proxy: proxies) {
 			if (proxy.desc != -1) {
 				mq_close(proxy.desc);
+				mq_unlink(proxy.topic.c_str());
 			}
 		}
 		
