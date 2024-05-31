@@ -49,7 +49,7 @@ namespace ipc_benchmark::trunk {
 		while (published < Performance::DATA_AMOUNT) {
 			boost::interprocess::scoped_lock<boost::interprocess::interprocess_mutex> lock(*mutex);
 			for (Proxy& target : targets) {
-				target.list->push_back(ShmString("value", alloc));
+				target.list->push_back(ShmString("value" + std::to_string(published), alloc));
 				target.cond->notify_all();
 			}
 			published++;
