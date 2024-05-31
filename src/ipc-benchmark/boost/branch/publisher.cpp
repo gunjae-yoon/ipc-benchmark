@@ -41,7 +41,7 @@ namespace ipc_benchmark::branch {
 		while (published < Performance::DATA_AMOUNT) {
 			for (Proxy& proxy: proxies) {
 				boost::interprocess::scoped_lock<boost::interprocess::interprocess_mutex> lock(*(proxy.obj->mutex));
-				proxy.obj->list->push_back(ShmString("value", proxy.obj->segment.get_segment_manager()));
+				proxy.obj->list->push_back(ShmString("value" + std::to_string(published), proxy.obj->segment.get_segment_manager()));
 				proxy.obj->cond->notify_all();
 			}
 			published++;
