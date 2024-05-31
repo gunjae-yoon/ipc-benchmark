@@ -20,15 +20,17 @@ protected:
 
 int main(int argc, char** argv) {
 	logger.info("ipc-benchmark version:", Version::full);
-	const uint64_t count = 100;
 	const Performance* tests[] = { new branch::Performance(), new trunk::Performance(), new mqueue::Performance() };
 
-	for (const Performance* test : tests) {
-		uint64_t value = test->run(count).count();
-		std::stringstream ss;
-		ss.imbue(std::locale(std::locale::classic(), new comma_facet));
-		ss << value;
-		logger.info("test result of", boost::core::demangle(typeid(*test).name()), "is", ss.str(), "nanoseconds");
+	for (uint64_t count = 10; count < 101; count += 10) {
+		logger.info("test targets:", count);
+		for (const Performance* test : tests) {
+			uint64_t value = test->run(count).count();
+			std::stringstream ss;
+			ss.imbue(std::locale(std::locale::classic(), new comma_facet));
+			ss << value;
+			logger.info("test result of", boost::core::demangle(typeid(*test).name()), "is", ss.str(), "nanoseconds");
+		}
 	}
 	return 0;
 }
