@@ -1,6 +1,10 @@
 #include <ipc-benchmark/boost/trunk/performance.h>
 #include <list>
 
+#ifndef TEST_SHM_TRUNK_SIZE
+#define TEST_SHM_TRUNK_SIZE (1024 * 1024 * 1024)
+#endif
+
 #define __CLASS__ "[Performance]"
 
 using namespace std::chrono_literals;
@@ -21,7 +25,7 @@ namespace ipc_benchmark::trunk {
 		const char* shmname = "Trunk";
 		const char* topicname = "TrunkTopic";
 		const char* shmmutex = "TrunkMutex";
-		const uint64_t shmsize = (500 * 1024 * 1024); // 500MB
+		const uint64_t shmsize = TEST_SHM_TRUNK_SIZE;
 		
 		boost::interprocess::shared_memory_object::remove(shmname);
 		boost::interprocess::managed_shared_memory segment(boost::interprocess::create_only, shmname, shmsize);

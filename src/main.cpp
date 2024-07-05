@@ -10,6 +10,14 @@
 #include <locale>
 #include <iomanip>
 
+#ifndef TEST_COUNT_INC
+#define TEST_COUNT_INC 10
+#endif
+
+#ifndef TEST_COUNT_TOTAL
+#define TEST_COUNT_TOTAL 100
+#endif
+
 using namespace ipc_benchmark;
 
 struct comma_facet : public std::numpunct<char> {
@@ -22,7 +30,7 @@ int main(int argc, char** argv) {
 	logger.info("ipc-benchmark version:", Version::full);
 	const Performance* tests[] = { new branch::Performance(), new trunk::Performance(), new mqueue::Performance() };
 
-	for (uint64_t count = 10; count < 101; count += 10) {
+	for (uint64_t count = TEST_COUNT_INC; count <= TEST_COUNT_TOTAL; count += TEST_COUNT_INC) {
 		logger.info("test targets:", count);
 		for (const Performance* test : tests) {
 			uint64_t value = test->run(count).count();

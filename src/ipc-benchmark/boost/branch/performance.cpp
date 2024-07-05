@@ -2,6 +2,10 @@
 #include <ipc-benchmark/boost/branch/types.h>
 #include <list>
 
+#ifndef TEST_SHM_BRANCH_SIZE
+#define TEST_SHM_BRANCH_SIZE (10 * 1024 * 1024)
+#endif
+
 #define __CLASS__ "[Performance]"
 
 using namespace std::chrono_literals;
@@ -22,7 +26,7 @@ namespace ipc_benchmark::branch {
 		std::list<Proxy> proxies;
 		for (uint64_t idx = 0; idx < count; idx++) {
 			std::string strIdx = std::to_string(idx);
-			const uint64_t shmsize = (10 * 1024 * 1024); // 10MB
+			const uint64_t shmsize = TEST_SHM_BRANCH_SIZE; // 10MB
 
 			Proxy proxy = {{
 				"Branch" + strIdx,

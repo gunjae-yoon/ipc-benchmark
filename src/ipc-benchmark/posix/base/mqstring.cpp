@@ -1,9 +1,13 @@
 #include <ipc-benchmark/posix/base/mqstring.h>
 #include <cstdlib>
 
+#ifndef TEST_DATA_LENGTH
+#define TEST_DATA_LENGTH (size_t)(10*1024*1024)
+#endif
+
 namespace ipc_benchmark {
-	const uint64_t MqString::MAX_LEN = 256;
-	const uint64_t MqString::BUF_LEN = (256 + sizeof(uint32_t));
+	const uint64_t MqString::MAX_LEN = TEST_DATA_LENGTH;
+	const uint64_t MqString::BUF_LEN = (TEST_DATA_LENGTH + sizeof(uint32_t));
 
 	MqString::MqString(std::string val) : value(val) {
 	}

@@ -1,6 +1,10 @@
 #include <ipc-benchmark/posix/mqueue/publisher.h>
 #include <ipc-benchmark/base/performance.h>
 
+#ifndef TEST_DATA_LENGTH
+#define TEST_DATA_LENGTH (size_t)(10*1024*1024)
+#endif
+
 namespace ipc_benchmark::mqueue {
 	Publisher::Publisher(std::list<Proxy>& targets) {
 		for (Proxy& target : targets) {
@@ -34,9 +38,10 @@ namespace ipc_benchmark::mqueue {
 		}
 		
 		MqString data;
+		char pattern = '0';
 		uint64_t published = 0;
 		while (published < Performance::DATA_AMOUNT) {
-			data.value = "value" + std::to_string(published);
+			data.value = std::string(TEST_DATA_LENGTH, pattern + (published % 10));
 			data.serialize(buffer, MqString::BUF_LEN);
 			for (Proxy& proxy: proxies) {
 				if (mq_send(proxy.desc, buffer, MqString::BUF_LEN, 0) == -1) {

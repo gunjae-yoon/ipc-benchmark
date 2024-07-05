@@ -8,6 +8,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-fpermissive)
 
+add_compile_definitions(
+	TEST_COUNT_INC=1
+	TEST_COUNT_TOTAL=10
+	TEST_DATA_AMOUNT=10
+	TEST_DATA_LENGTH=10*1024*1024
+	TEST_SHM_BRANCH_SIZE=110*1024*1024
+	TEST_SHM_TRUNK_SIZE=1000*1024*1024
+)
+
 ##########################################################################
 # dependent packages
 ##########################################################################

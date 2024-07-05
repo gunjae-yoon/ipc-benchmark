@@ -2,6 +2,10 @@
 #include <ipc-benchmark/base/performance.h>
 #include <guutil/log/logger.h>
 
+#ifndef TEST_DATA_LENGTH
+#define TEST_DATA_LENGTH (size_t)(10*1024*1024)
+#endif
+
 namespace ipc_benchmark::trunk {
 	extern guutil::log::Logger logger; // global logger
 
@@ -45,11 +49,12 @@ namespace ipc_benchmark::trunk {
 
 	void Publisher::run() {
 		const ShmAllocator alloc(segment.get_segment_manager());
+		char pattern = '0';
 		uint64_t published = 0;
 		while (published < Performance::DATA_AMOUNT) {
 			boost::interprocess::scoped_lock<boost::interprocess::interprocess_mutex> lock(*mutex);
 			for (Proxy& target : targets) {
-				target.list->push_back(ShmString("value" + std::to_string(published), alloc));
+				target.list->push_back(ShmString(TEST_DATA_LENGTH, pattern + (published % 10), alloc));
 				target.cond->notify_all();
 			}
 			published++;

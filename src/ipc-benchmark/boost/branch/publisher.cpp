@@ -4,6 +4,10 @@
 
 #define __CLASS__ "[branch::Publisher]"
 
+#ifndef TEST_DATA_LENGTH
+#define TEST_DATA_LENGTH (size_t)(10*1024*1024)
+#endif
+
 namespace ipc_benchmark {
 	extern guutil::log::Logger logger; // global logger
 }
@@ -38,10 +42,11 @@ namespace ipc_benchmark::branch {
 
 	void Publisher::run() {
 		uint64_t published = 0;
+		char pattern = '0';
 		while (published < Performance::DATA_AMOUNT) {
 			for (Proxy& proxy: proxies) {
 				boost::interprocess::scoped_lock<boost::interprocess::interprocess_mutex> lock(*(proxy.obj->mutex));
-				proxy.obj->list->push_back(ShmString("value" + std::to_string(published), proxy.obj->segment.get_segment_manager()));
+				proxy.obj->list->push_back(ShmString(TEST_DATA_LENGTH, pattern + (published % 10), proxy.obj->segment.get_segment_manager()));
 				proxy.obj->cond->notify_all();
 			}
 			published++;
